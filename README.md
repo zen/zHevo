@@ -14,7 +14,7 @@ My Hypercube Evolution 300x300x300 build with Prusa MK42 heated bed
 - Bearings: all LMUU type
 
 ### Electronics
-- Board: MKS Sbase 1.3
+- Board: MKS SBase 1.3
 - Endstops:
   - XY min/max optical endstops
   - Z min mechanical endstop
@@ -26,3 +26,7 @@ My Hypercube Evolution 300x300x300 build with Prusa MK42 heated bed
 
 ### Printed parts
 - Base: standard Scott3D HEVO parts
+
+
+## Configuration
+config.txt - always up to date Smoothieware configuration for MKS SBase 1.3
