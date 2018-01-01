@@ -77,16 +77,17 @@ gamma_max_rate                               500.0            # Maximum rate in 
 # Microstep: 32
 # steps_per_mm = (motor_steps_per_rev * driver_microstep) / (hob_effective_diameter * pi)
 # steps_per_mm = (200 * 32) / (12 * 3.1415) = 6400 / 37,698 = 
-
+# Calibration formula:
+# new_e_steps = old_e_steps * (100 / distance_actually_moved)
 
 extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend.steps_per_mm                    170           # Steps per mm for extruder stepper
+extruder.hotend.steps_per_mm                    175           # Steps per mm for extruder stepper
 extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
 extruder.hotend.max_speed                       100           # Maximum speed in mm/s
 
 extruder.hotend.step_pin                        2.3           # Pin for extruder step signal
-extruder.hotend.dir_pin                         0.22          # Pin for extruder dir signal ( add '!' to reverse direction )
+extruder.hotend.dir_pin                         0.22!         # Pin for extruder dir signal ( add '!' to reverse direction )
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 
