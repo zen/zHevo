@@ -61,7 +61,7 @@ beta_max_rate                                10000.0          # Maxmimum rate in
 gamma_step_pin                               2.2              # Pin for gamma stepper step signal
 gamma_dir_pin                                0.20             # Pin for gamma stepper direction, add '!' to reverse direction
 gamma_en_pin                                 0.19             # Pin for gamma enable
-gamma_current                                1.5              # Z stepper motor current
+gamma_current                                1.6              # Z stepper motor current
 gamma_max_rate                               500.0            # Maximum rate in mm/min
 
 ##
@@ -70,19 +70,24 @@ gamma_max_rate                               500.0            # Maximum rate in 
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
 
-# steps_per_mm for MK8 Geetech Kit based on https://reprapchampion.com/pages/mk8-extruder
+# steps_per_mm for MK8 Full Metal Extruder based on https://reprapchampion.com/pages/mk8-extruder
+# https://www.aliexpress.com/item/Improved-Version-Printer-Parts-Reprap-Makerbot-MK8-Full-Metal-Aluminum-Alloy-Bowden-Extruder-for-1-75MM/32473855114.html
+# Hob diameter: 12mm
+# Steps: 200
+# Microstep: 32
 # steps_per_mm = (motor_steps_per_rev * driver_microstep) / (hob_effective_diameter * pi)
-# steps_per_mm = 200 * 32 / 10.95*3.14 = 185
+# steps_per_mm = (200 * 32) / (12 * 3.1415) = 6400 / 37,698 = 
 
-##extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
-##extruder.hotend.steps_per_mm                    185           # Steps per mm for extruder stepper
-##extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
-##extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
-##extruder.hotend.max_speed                       50            # Maximum speed in mm/s
 
-##extruder.hotend.step_pin                        2.3           # Pin for extruder step signal
-##extruder.hotend.dir_pin                         0.22          # Pin for extruder dir signal ( add '!' to reverse direction )
-##extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
+extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
+extruder.hotend.steps_per_mm                    170           # Steps per mm for extruder stepper
+extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
+extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
+extruder.hotend.max_speed                       100           # Maximum speed in mm/s
+
+extruder.hotend.step_pin                        2.3           # Pin for extruder step signal
+extruder.hotend.dir_pin                         0.22          # Pin for extruder dir signal ( add '!' to reverse direction )
+extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 
 
@@ -99,7 +104,7 @@ gamma_max_rate                               500.0            # Maximum rate in 
 #extruder.hotend.retract_zlift_length            0            # Z-lift on retract in mm, 0 disables
 #extruder.hotend.retract_zlift_feedrate          6000         # Z-lift feedrate in mm/min (Note mm/min NOT mm/sec)
 
-delta_current                                    1.6          # First extruder stepper motor current
+delta_current                                    1.7          # First extruder stepper motor current
 
 ##
 ## END TODO
@@ -120,21 +125,6 @@ delta_current                                    1.6          # First extruder s
 #extruder.hotend2.z_offset                       0            # z offset from origin in mm
 
 #epsilon_current                                 1.6          # Second extruder stepper motor current
-
-
-## Laser module configuration
-# See http://smoothieware.org/laser
-#laser_module_enable                           false           # Whether to activate the laser module at all
-#laser_module_pwm_pin                          2.5             # This pin will be PWMed to control the laser.
-                                                              # Only pins 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 1.18, 1.20, 1.21, 1.23, 1.24, 1.26, 3.25 and 3.26
-                                                              # can be used since laser requires hardware PWM, see http://smoothieware.org/pinout
-#laser_module_ttl_pin                         1.30            # This pin turns on when the laser turns on, and off when the laser turns off.
-#laser_module_maximum_power                   1.0             # This is the maximum duty cycle that will be applied to the laser
-#laser_module_minimum_power                   0.0             # This is a value just below the minimum duty cycle that keeps the laser
-                                                              # active without actually burning.
-#laser_module_default_power                   0.8             # This is the default laser power that will be used for cuts if a power has not been specified.  The value is a scale 
-                                                              # between the maximum and minimum power levels specified above
-#laser_module_pwm_period                      20              # This sets the pwm frequency as the period in microseconds
 
 ## Temperature control configuration
 # See http://smoothieware.org/temperaturecontrol
@@ -207,19 +197,15 @@ temperature_control.hotend.min_temp         18                # Set minimum temp
 ## Switch modules
 # See http://smoothieware.org/switch
 
-# Switch module for fan control
+
+
+#  TODO Switch module for fan control
 switch.fan.enable                            true             # Enable this module
 switch.fan.input_on_command                  M106             # Command that will turn this switch on
 switch.fan.input_off_command                 M107             # Command that will turn this switch off
 switch.fan.output_pin                        2.6              # Pin this module controls
 switch.fan.output_type                       pwm              # PWM output settable with S parameter in the input_on_comand
 #switch.fan.max_pwm                          255              # Set max pwm for the pin default is 255
-
-#switch.misc.enable                          true             # Enable this module
-#switch.misc.input_on_command                M42              # Command that will turn this switch on
-#switch.misc.input_off_command               M43              # Command that will turn this switch off
-#switch.misc.output_pin                      2.4              # Pin this module controls
-#switch.misc.output_type                     digital          # Digital means this is just an on or off pin
 
 ## Temperatureswitch
 # See http://smoothieware.org/temperatureswitch
@@ -239,29 +225,30 @@ corexy_homing                                true             # Set to true if h
 alpha_min_endstop                            1.24^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 alpha_max_endstop                            1.25^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 alpha_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-alpha_min                                    -21               # This gets loaded as the current position after homing when home_to_min is set
-alpha_max                                    250              # This gets loaded as the current position after homing when home_to_max is set
+alpha_min                                    -21              # This gets loaded as the current position after homing when home_to_min is set
+#alpha_max                                    250              # This gets loaded as the current position after homing when home_to_max is set
 beta_min_endstop                             1.26^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 beta_max_endstop                             1.27^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 beta_homing_direction                        home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-beta_min                                     -87               # This gets loaded as the current position after homing when home_to_min is set
-beta_max                                     210              # This gets loaded as the current position after homing when home_to_max is set
-gamma_min_endstop                            1.28^            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
+beta_min                                     -87              # This gets loaded as the current position after homing when home_to_min is set
+#beta_max                                     210              # This gets loaded as the current position after homing when home_to_max is set
+gamma_min_endstop                            1.28^!           # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
+gamma_max_endstop                            nc               # Pin to read max endstop, uncomment this and comment the above if using max endstops
 #gamma_max_endstop                           1.29^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 gamma_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
 gamma_min                                    0                # This gets loaded as the current position after homing when home_to_min is set
-gamma_max                                    200              # This gets loaded as the current position after homing when home_to_max is set
+#gamma_max                                    200              # This gets loaded as the current position after homing when home_to_max is set
 
-alpha_max_travel                             260              # Max travel in mm for alpha/X axis when homing
-beta_max_travel                              220              # Max travel in mm for beta/Y axis when homing
+alpha_max_travel                             300              # Max travel in mm for alpha/X axis when homing
+beta_max_travel                              300              # Max travel in mm for beta/Y axis when homing
 
 ## TODO measure max Z axis lenght
-gamma_max_travel                             250              # Max travel in mm for gamma/Z axis when homing
+gamma_max_travel                             255              # Max travel in mm for gamma/Z axis when homing
 
 # Optional enable limit switches, actions will stop if any enabled limit switch is triggered
 alpha_limit_enable                           true            # Set to true to enable X min and max limit switches
-beta_limit_enable                            true           # Set to true to enable Y min and max limit switches
-gamma_limit_enable                           true            # Set to true to enable Z min and max limit switches
+beta_limit_enable                            true            # Set to true to enable Y min and max limit switches
+gamma_limit_enable                           false            # Set to true to enable Z min and max limit switches
 
 # Endstops home at their fast feedrate first, then once the endstop is found they home again at their slow feedrate for accuracy
 alpha_fast_homing_rate_mm_s                  50               # Alpha/X fast homing feedrate in mm/second
@@ -290,11 +277,11 @@ move_to_origin_after_home                     false            # Move XY to 0,0 
 ## Z-probe
 # See http://smoothieware.org/zprobe
 zprobe.enable                                false           # Set to true to enable a zprobe
-zprobe.probe_pin                             1.28!^          # Pin probe is attached to, if NC remove the !
-zprobe.slow_feedrate                         5               # Mm/sec probe feed rate
+#zprobe.probe_pin                             1.28!^          # Pin probe is attached to, if NC remove the !
+#zprobe.slow_feedrate                         5               # Mm/sec probe feed rate
 #zprobe.debounce_count                       100             # Set if noisy
-zprobe.fast_feedrate                         100             # Move feedrate mm/sec
-zprobe.probe_height                          5               # How much above bed to start probe
+#zprobe.fast_feedrate                         100             # Move feedrate mm/sec
+#zprobe.probe_height                          5               # How much above bed to start probe
 #gamma_min_endstop                           nc              # Normally 1.28. Change to nc to prevent conflict,
 
 # Levelling strategy
@@ -360,7 +347,7 @@ network.ip_gateway                           192.168.0.1     # The gateway addre
 ## System configuration
 # Serial communications configuration ( baud rate defaults to 9600 if undefined )
 # For communication over the UART port, *not* the USB/Serial port
-uart0.baud_rate                              115200           # Baud rate for the default hardware ( UART ) serial port
+uart0.baud_rate                              250000           # Baud rate for the default hardware ( UART ) serial port
 
 second_usb_serial_enable                     false            # This enables a second USB serial port
 #leds_disable                                true             # Disable using leds after config loaded
@@ -368,7 +355,7 @@ second_usb_serial_enable                     false            # This enables a s
 
 # Kill button maybe assigned to a different pin, set to the onboard pin by default
 # See http://smoothieware.org/killbutton
-kill_button_enable                           true             # Set to true to enable a kill button
+kill_button_enable                           false             # Set to true to enable a kill button
 kill_button_pin                              2.12             # Kill button pin. default is same as pause button 2.12 (2.11 is another good choice)
 
 #msd_disable                                 false            # Disable the MSD (USB SDCARD), see http://smoothieware.org/troubleshooting#disable-msd
