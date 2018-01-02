@@ -169,9 +169,9 @@ temperature_control.hotend.min_temp         18                # Set minimum temp
 # See http://smoothieware.org/temperatureswitch
 
 switch.hotendfan.enable                true   # true/false
-# switch.hotendfan.input_on_command    M106   #
-# switch.hotendfan.input_off_command   M107   #
-# switch.hotendfan.subcode                2   #
+switch.hotendfan.input_on_command    M106   #
+switch.hotendfan.input_off_command   M107   #
+switch.hotendfan.subcode                2   #
 switch.hotendfan.output_pin             2.6   # Heater2 terminal
 switch.hotendfan.output_type            pwm   # digital would be on/off
 switch.hotendfan.max_pwm                255   # default is 255
@@ -193,32 +193,22 @@ temperature_control.hotend.runaway_range                10   # How far from the 
 
 # PID configuration
 # See http://smoothieware.org/temperaturecontrol#pid
-#temperature_control.hotend.p_factor         13.7             # P ( proportional ) factor
-#temperature_control.hotend.i_factor         0.097            # I ( integral ) factor
-#temperature_control.hotend.d_factor         24               # D ( derivative ) factor
+# E3D clone, 0.4 nozzle, original blue hotend fan, heater block silicon sock
+# Cycle 4: max: 241.923, min: 232.241, avg separation: 0.0365906
+#	Ku: 67.0646, Pu: 20.75
+#	Trying:
+#	Kp:  40.2
+#	Ki: 3.878
+#	Kd:   104
+
+temperature_control.hotend.p_factor         40.2             # P ( proportional ) factor
+temperature_control.hotend.i_factor         3.878            # I ( integral ) factor
+temperature_control.hotend.d_factor         104              # D ( derivative ) factor
 
 #temperature_control.hotend.max_pwm          64               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
-# Second hotend configuration
-##temperature_control.hotend2.enable            false           # Whether to activate this ( "hotend" ) module at all.
-##temperature_control.hotend2.thermistor_pin    0.25           # Pin for the thermistor to read
-##temperature_control.hotend2.heater_pin        1.23           # Pin that controls the heater
-##temperature_control.hotend2.thermistor        EPCOS100K      # See http://smoothieware.org/temperaturecontrol#thermistor
-#temperature_control.hotend2.beta             4066           # or set the beta value
-##temperature_control.hotend2.set_m_code        104            # M-code to set the temperature for this module
-##temperature_control.hotend2.set_and_wait_m_code 109          # M-code to set-and-wait for this module
-##temperature_control.hotend2.designator        T1             # Designator letter for this module
-
-#temperature_control.hotend2.p_factor          13.7           # P ( proportional ) factor
-#temperature_control.hotend2.i_factor          0.097          # I ( integral ) factor
-#temperature_control.hotend2.d_factor          24             # D ( derivative ) factor
-
-#temperature_control.hotend2.max_pwm          64              # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
-
 ## Switch modules
 # See http://smoothieware.org/switch
-
-
 
 #  Switch module for print fan control
 switch.printfan.enable                            true             # Enable this module
@@ -227,7 +217,6 @@ switch.printfan.input_off_command                 M107             # Command tha
 switch.printfan.output_pin                        2.4              # Pin this module controls
 switch.printfan.output_type                       pwm              # PWM output settable with S parameter in the input_on_comand
 #switch.printfan.max_pwm                          255              # Set max pwm for the pin default is 255
-
 
 ## Endstops
 # See http://smoothieware.org/endstops
