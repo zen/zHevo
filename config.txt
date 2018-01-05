@@ -150,6 +150,17 @@ temperature_control.bed.min_temp             18                # Set minimum tem
 #temperature_control.bed.hysteresis          2.0              # Set to the temperature in degrees C to use as hysteresis
 
 
+# PID autotune. MK42 bed clone
+# Cycle 4: max: 61.8829, min: 57.9178, avg separation: 0.105118
+#	Ku: 163.769, Pu: 70.3
+#	Trying:
+#	Kp:  98.3
+#	Ki: 2.795
+#	Kd:   863
+
+temperature_control.bed.p_factor         98.3             # P ( proportional ) factor
+temperature_control.bed.i_factor         2.795            # I ( integral ) factor
+temperature_control.bed.d_factor         863              # D ( derivative ) factor
 
 # First hotend configuration
 temperature_control.hotend.enable            true             # Whether to activate this ( "hotend" ) module at all.
