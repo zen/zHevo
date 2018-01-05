@@ -64,9 +64,6 @@ gamma_en_pin                                 0.19             # Pin for gamma en
 gamma_current                                1.6              # Z stepper motor current
 gamma_max_rate                               500.0            # Maximum rate in mm/min
 
-##
-## TODO
-
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
 
@@ -90,7 +87,7 @@ extruder.hotend.step_pin                        2.3           # Pin for extruder
 extruder.hotend.dir_pin                         0.22!         # Pin for extruder dir signal ( add '!' to reverse direction )
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
-
+delta_current                                    1.7          # First extruder stepper motor current
 
 # Extruder offset
 #extruder.hotend.x_offset                        0            # X offset from origin in mm
@@ -104,11 +101,6 @@ extruder.hotend.en_pin                          0.21          # Pin for extruder
 #extruder.hotend.retract_recover_feedrate        8            # Recover feedrate in mm/sec (should be less than retract feedrate)
 #extruder.hotend.retract_zlift_length            0            # Z-lift on retract in mm, 0 disables
 #extruder.hotend.retract_zlift_feedrate          6000         # Z-lift feedrate in mm/min (Note mm/min NOT mm/sec)
-
-delta_current                                    1.7          # First extruder stepper motor current
-
-##
-## END TODO
 
 # Second extruder module configuration
 #extruder.hotend2.enable                         false         # Whether to activate the extruder module at all. All configuration is ignored if false
