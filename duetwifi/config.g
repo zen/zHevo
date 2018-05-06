@@ -24,10 +24,10 @@ M569 P2 S1                                	; Drive 2 goes forwards
 M569 P3 S1                                	; Drive 3 goes forwards
 M350 X16 Y16 Z16 E16 I1                   	; Configure microstepping with interpolation
 M92 X80 Y80 Z400 E403                     	; Set steps per mm
-M566 X800 Y800 Z12 E800                   	; Set maximum instantaneous speed changes (mm/min)
+M566 X1000 Y1000 Z12 E1200                   	; Set maximum instantaneous speed changes (mm/min)
 M203 X12000 Y12000 Z400 E12000            	; Set maximum speeds (mm/min)
 M201 X800 Y800 Z250 E800                  	; Set accelerations (mm/s^2)
-M906 X1000 Y1000 Z1000 E1200 I30          	; Set motor currents (mA) and motor idle factor in per cent
+M906 X1000 Y1000 Z1000 E1400 I30          	; Set motor currents (mA) and motor idle factor in per cent
 M84 S30                                   	; Set idle timeout
 
 ; Axis Limits
@@ -41,12 +41,12 @@ M574 Z1 S2 				  	; Define Z to use Probe. Home to Min
 
 ; Z-Probe
 ;M558 P0				   	 ; Disable Z probe
-;M558 P9 F400 H10 T4000	  		   	 ; Set Z Probe to type BLTouch output where Z probe connector is used. Used for z only
-M558 X0 Y0 Z1 H10 F100 T7200 A8 R0.5 S0.008	; P9 for BLTouch, dive height 10mm, probe at 100mm/s, travel 72000mm/s, up to 8 probes, pause 0.5s
+M558 P9 F400 H10 T4000	  		   	 ; Set Z Probe to type BLTouch output where Z probe connector is used. Used for z only
+;M558 P9 X0 Y0 Z1 H10 F600 T7200 A8 R0.5 S0.008	; P9 for BLTouch, dive height 10mm, probe at 100mm/s, travel 72000mm/s, up to 8 probes, pause 0.5s
 
-G31 P25 X23 Y0 Z3.0			   	; Set Z probe trigger value, offset and trigger height
-M557 X5:245 Y5:205 S40 			   	; Define mesh grid
-M376 H20				   	; Taper off compensation over 20mm of height
+G31 P25 X23 Y0 Z2.1			   	; Set Z probe trigger value, offset and trigger height
+M557 X5:245 Y5:205 S20 			   	; Define mesh grid
+;M376 H20				   	; Taper off compensation over 20mm of height
 
 ; Heaters
 M307 H7 A-1 C-1 D-1			   	; Disable heater 7 (PWM#5), it is used by 3D touch

@@ -6,7 +6,7 @@
 ; Home XY
 G91                     ; relative positioning
 G1 Z5 F7200 S2          ; lift Z relative to current position
-G1 S1 X-255 Y-215 F3600 ; move quickly to X or Y endstop and stop there (first pass)
+G1 S1 X-255 Y-215 F7200 ; move quickly to X or Y endstop and stop there (first pass)
 G1 S1 X-255             ; home X axis
 G1 S1 Y-215             ; home Y axis
 G1 X5 Y5 F7200          ; go back a few mm
@@ -14,11 +14,19 @@ G1 S1 X-255 F360        ; move slowly to X axis endstop once more (second pass)
 G1 S1 Y-215             ; then move slowly to Y axis endstop
 
 ; Home Z
-G90                     ; absolute positioning
-G1 X125 Y110 F7200     ; go to first bed probe point and home Z
-G30                     ; home Z by probing the bed
-G1 Z5 F120 S2          ; uncomment this line to lift the nozzle after homing
+M561			; reset bed compensation
+T0 			; select tool
+M280 P7 S160 I1		; Alarm Release and Push-Pin UP
+G4 P1000		; Wait one second
+G91                 	; relative positioning
+G1 Z5 F7200 S2      	; lift Z relative to current position
+;G4 P500 		; wait for the bed to lower
+G90                 	; absolute positioning
+G1 X103 Y110 F7200 	; go to first probe point
+G30                 	; home Z by probing the bed
 
+
+; Simple switch homing
 ;G1 Z-200 S1 F400 ; move Z down until the switch triggers
 ;G1 Z2 F400
 ;G1 Z-200 S1 F40 ; move Z down until the switch triggers

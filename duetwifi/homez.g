@@ -5,11 +5,12 @@
 M561			; reset bed compensation
 T0 			; select tool
 M280 P7 S160 I1		; Alarm Release and Push-Pin UP
+G4 P1000		; Wait one second
 G91                 	; relative positioning
 G1 Z5 F7200 S2      	; lift Z relative to current position
-G4 P500 		; wait for the bed to lower
+;G4 P500 		; wait for the bed to lower
 G90                 	; absolute positioning
-G1 X125 Y110 F7200 	; go to first probe point
+G1 X103 Y110 F7200 	; go to first probe point
 G30                 	; home Z by probing the bed
 
 ; Uncomment the following lines to lift Z after probing
@@ -17,6 +18,8 @@ G30                 	; home Z by probing the bed
 ;G1 Z5 F120 S2      ; lift Z relative to current position
 ;G90                ; absolute positioning
 
+
+; Simple switch homing
 ;G91 ; relative mode
 ;G1 Z4 F200 S2 ; raise head 4mm to ensure it is above the switch trigger height
 ;G90 ; back to absolute mode
